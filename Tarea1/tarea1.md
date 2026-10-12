@@ -1,4 +1,4 @@
-#Objetivo 1: Mapeo de Arquitectura Lógica
+# Objetivo 1: Mapeo de Arquitectura Lógica
 
 ## Diagrama de Flujo
 ![Diagrama](diagrama.png)
