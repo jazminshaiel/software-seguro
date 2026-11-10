@@ -1,10 +1,10 @@
 # Objetivo 2: Ejecución de Laboratorios
 
-## Laboratorio 1: Turnero
+## Laboratorio 1 - Turnero
 
 **Tipo de vulnerabilidad:** IDOR (Insecure Direct Object Reference)
 
-**Pasos realizados:**
+**Pasos realizados**
 1. Al ingresar con el usuario `luis` e inspeccionar la pestaña Red (Network), observé que la aplicación consume la API `/api/{user_id}/appointments/` para listar los turnos. Anoté que el `user_id` de luis es `1`.
 
 2. Descubrí que el endpoint GET no validaba correctamente la sesión. Al modificar el `{user_id}` en la URL (por ejemplo, probando con el ID 2), el servidor devolvía una lista vacía (el usuario existía, pero no tenía turnos).
@@ -15,11 +15,11 @@
 
 ---
 
-## Laboratorio 2: Ventas
+## Laboratorio 2 - Ventas
 
 **Tipo de vulnerabilidad:** Information Disclosure - IDOR
 
-**Pasos realizados:**
+**Pasos realizados**
 1. Identifiqué que el endpoint `/ventas` requería un parámetro `id`. Las pruebas manuales devolvían respuestas `403 Forbidden` (recurso existente pero protegido) y `404 Not Found` (recurso inexistente), alternando de una forma que impedía un análisis directo.
 
 2. Desarrollé un script en Python (con ayuda de IA) utilizando las librerías `requests`, `time` y `hashlib`. El script iteraba sobre un rango de IDs del 1 al 3500 (rango aproximado obtenido en las pruebas manuales) en la URL `/ventas?id=X`.
@@ -34,11 +34,11 @@
 
 ---
 
-## Laboratorio 3: Presupuesto
+## Laboratorio 3 - Presupuesto
 
 **Tipo de vulnerabilidad:** Mass Assignment
 
-**Pasos realizados:**
+**Pasos realizados**
 1. Inspeccioné la petición `GET /api/gastos/` y vi que el servidor devolvía un JSON con todos los gastos, incluyendo sus IDs, montos, categorías y el campo `revisado: false`.
 
 2. Hice clic en el botón "Revisar" de un gasto y capturé la petición `POST /api/gastos/{id}/editar/`. El cuerpo enviaba `{"revisado": true}`. Al no haber validación estricta, el servidor aceptaba la inyección de otros campos (Mass Assignment).
@@ -50,11 +50,11 @@
 ---
 
 
-## Laboratorio 4: Gran Rifa 2019
+## Laboratorio 4 - Gran Rifa 2019
 
 **Tipo de vulnerabilidad:** Mass Assignment
 
-**Pasos realizados:**
+**Pasos realizados**
 1. Ingresé a la plataforma con las credenciales provistas (`guido` / `RIFA_2019`).
 
 2. Abrí el Inspector de Firefox (F12) en la pestaña "Red" (Network) para observar el tráfico.
