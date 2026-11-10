@@ -1,6 +1,6 @@
 ## Configuración de Entorno: Proxy Burp Suite
 
-![Captura](captura_burp.png)
+![Captura](capturaBurp.png)
 
 En la imagen se observa cómo el navegador intenta acceder al laboratorio de "Ventas", pero Burp Suite intercepta la petición GET /ventas/ antes de que llegue al servidor. En el panel principal se visualizan los encabezados HTTP (como el Host, las Cookies de sesión y el User-Agent del navegador) en texto plano. Esto demuestra que el tráfico está siendo ruteado y capturado correctamente para su análisis.
 
