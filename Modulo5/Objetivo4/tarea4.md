@@ -1,0 +1,10 @@
+## Objetivo 4: Manejo Inseguro de Errores (Stack Traces)
+Investiga la diferencia entre un "mensaje de error genérico" y un "Stack Trace" (traza de la pila) expuesto en un entorno de producción. Explica por qué revelar un Stack Trace detallado facilita enormemente la fase de explotación de un atacante.
+
+*   **Error genérico:** Es la respuesta controlada que se le muestra al usuario final. No contiene ningún detalle técnico; el usuario sabe que algo falló, pero el mensaje no revela pistas sobre la causa raíz, la lógica de negocio ni la estructura interna del sistema. (Ej: "Ocurrió un error inesperado" o un código HTTP 500).
+
+*   **Stack Trace (Traza de la pila):** Es un volcado técnico que se genera cuando una aplicación colapsa. Durante el desarrollo, el programador necesita saber exactamente en qué archivo, función y número de línea ocurrió la falla. El Stack Trace muestra la secuencia exacta de funciones (la pila de llamadas) que se estaban ejecutando antes de que el sistema se detuviera por completo.
+
+Exponer esta información en un entorno de producción es altamente peligroso, ya que le brinda al atacante una ventaja considerable al revelar datos críticos, tales como: rutas absolutas internas del servidor (ej. `/var/www/html/...`), tecnologías y versiones exactas del backend, nombres de archivos y líneas de código, y la estructura de la base de datos.
+
+Esto facilita mucho la explotación porque el atacante deja de adivinar. Al obtener el "mapa" del sistema y comprender cómo está construido, puede identificar vectores de ataque directos. Por ejemplo, si el Stack Trace revela un error de conexión o sintaxis en una consulta SQL, el atacante confirma de inmediato que el sistema interactúa con una base de datos y sabe que puede intentar una **Inyección SQL** apuntando a ese endpoint específico.
